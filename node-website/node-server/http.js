@@ -1,5 +1,8 @@
 const http = require('http')
 const url = require('url')
+const logUtil = require('log')
+
+logUtil.log('hello')
 
 const server = http.createServer((req, res) => {
     parseUrl(req)
@@ -17,7 +20,7 @@ const server = http.createServer((req, res) => {
 server.listen(3000)
 
 function parseUrl(request) {
-    if(request.url !== '/favicon.ico') {
+    if (request.url !== '/favicon.ico') {
         const result = url.parse(request.url, true)
         console.log(result)
         console.log(result.query.name)
