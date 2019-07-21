@@ -37,10 +37,20 @@ fileReadStream.on('data', (chunk) => {
 fileReadStream.on('end', () => {
     console.log('读取结束')
     console.log('count------>', count)
-    console.log('content:', content)
+    console.log('content:', content.length)
 })
 
 // 读取失败
 fileReadStream.on('error', (err) => {
     console.error(err)
+})
+
+// --------------写入----------------
+const fileWriteStream = fs.createWriteStream('./test/temp.js')
+const data = '是我入戏太深，结局却一个人，爱一个人很同，我知道你不知道'
+fileWriteStream.write(data, 'utf-8')
+// 写入完成
+fileWriteStream.end()
+fileWriteStream.on('finish', () => {
+    console.log('写入完成')
 })
