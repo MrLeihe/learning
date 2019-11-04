@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>stone的朋友们</title>
+</head>
+
+<body>
+    <div id="app">
+        <div>{{name}}</div>
+        <div s-html='html'></div>
+        <input s-model='model'></input>
+        <div>{{model}}</div>
+    </div>
+
+    <script src="svue.js"></script>
+    <script src="compiler.js"></script>
+    <script>
+        const app = new SVue({
+            el: '#app',
+            data: {
+                name: 'stone',
+                model: 'ddd',
+                html: '<button>adfadsf</button>'
+            }
+        });
+
+        app.$data.name = 'haha';
+        console.log('name', app.$data.name);
+    </script>
+</body>
+
+</html>
