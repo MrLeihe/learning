@@ -1,0 +1,26 @@
+.stack {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  perspective: 1000px;
+  perspective-origin: 50% 150%;
+  -webkit-perspective: 1000px;
+  -webkit-perspective-origin: 50% 150%;
+  margin: 0;
+  padding: 0;
+}
+
+.stack-item {
+  background: #fff;
+  height: 100%;
+  width: 100%;
+  border-radius: 4px;
+  text-align: center;
+  overflow: hidden;
+}
+
+.stack-item img {
+  width: 100%;
+  display: block;
+  pointer-events: none;
+}

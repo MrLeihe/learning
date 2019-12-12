@@ -15,6 +15,7 @@
         <div s-html='html'></div>
         <input s-model='model'></input>
         <div>{{model}}</div>
+        <div @click="handleClick">点我</div>
     </div>
 
     <script src="svue.js"></script>
@@ -26,6 +27,12 @@
                 name: 'stone',
                 model: 'ddd',
                 html: '<button>adfadsf</button>'
+            },
+            methods: {
+                handleClick(event) {
+                    this.name = 'xiaofang'
+                    // window.location.href = 'event.html'
+                }
             }
         });
 

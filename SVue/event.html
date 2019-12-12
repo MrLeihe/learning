@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>stone的朋友们</title>
+    <link rel="stylesheet" type="text/css" href="./event.css" />
+</head>
+
+<body>
+    <div id="app">
+        <div id="container">
+            <input id="id-checkbox" type="checkbox" />
+        </div>
+    </div>
+    // 图片堆叠dom
+    <!--opacity: 0 隐藏我们不想看到的stack-item层级-->
+    <!--z-index: -1 调整stack-item层级"-->
+    <ul class="stack">
+        <li class="stack-item" style="transform: translate3d(0px, 0px, 0px);opacity: 1;z-index: 10;"><img src="1.jpeg"
+                alt="01"></li>
+        <li class="stack-item" style="transform: translate3d(0px, 0px, -60px);opacity: 1;z-index: 1"><img src="2.jpeg"
+                alt="02"></li>
+        <li class="stack-item" style="transform: translate3d(0px, 0px, -120px);opacity: 1;z-index: 1"><img src="3.jpeg"
+                alt="03"></li>
+        <li class="stack-item" style="transform: translate3d(0px, 0px, -180px);opacity: 0;z-index: -1"><img src="4.jpeg"
+                alt="04"></li>
+        <li class="stack-item" style="transform: translate3d(0px, 0px, -180px);opacity: 0;z-index: -1"><img src="5.jpeg"
+                alt="05"></li>
+    </ul>
+
+    <script type="text/javascript">
+
+        document.querySelector('#id-checkbox').addEventListener('click', event => {
+            console.log('checkbox-click', event)
+            event.preventDefault()
+            event.stopPropagation()
+        })
+        document.querySelector('#container').addEventListener('click', event => {
+            console.log('container-click')
+        })
+    </script>
+</body>
+
+</html>

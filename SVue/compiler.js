@@ -56,6 +56,7 @@ class Compiler {
         const dir = attrName.substring(2);
         this[dir] && this[dir](node, value);
       } else if (this.isEventDirective(attrName)) {
+        this.eventHandler(node, attrName.substring(1), value);
       }
     });
   }
@@ -79,14 +80,16 @@ class Compiler {
    * @param {string} attrName 属性名
    */
   isDirective(attrName) {
-    return attrName.startsWith('s-');
+    return attrName && attrName.startsWith('s-');
   }
 
   /**
    * 自定义事件
    * @param {string} attrName 属性名
    */
-  isEventDirective(attrName) {}
+  isEventDirective(attrName) {
+    return attrName && attrName.startsWith('@');
+  }
 
   text(node, exp) {
     this.update(node, exp, 'text');
@@ -98,17 +101,12 @@ class Compiler {
 
   model(node, exp) {
     this.update(node, exp, 'model');
-    console.log('model', exp);
     node.addEventListener('input', e => {
-      console.log('input', e.target.value);
-      console.log('vm', this.$vm);
       this.$vm[exp] = e.target.value;
-      console.log('input', this.$vm[exp]);
     });
   }
 
   update(node, exp, type) {
-    console.log('update', exp);
     const updaterFn = this[`${type}Updater`];
     updaterFn && updaterFn(node, this.$vm[exp]);
     new Watcher(this.$vm, exp, value => {
@@ -121,12 +119,15 @@ class Compiler {
   }
 
   htmlUpdater(node, value) {
-    console.log('htmlUpdater', value);
     node.innerHTML = value;
   }
 
   modelUpdater(node, value) {
-    console.log('modelUpdater', value);
     node.value = value;
+  }
+
+  eventHandler(node, eventType, methodName) {
+    const eventFn = this.$vm.$options.methods[methodName];
+    node.addEventListener(eventType, eventFn.bind(this.$vm), false);
   }
 }

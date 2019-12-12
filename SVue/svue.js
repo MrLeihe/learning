@@ -2,6 +2,7 @@ class SVue {
   // 数据响应
   // 依赖收集
   constructor(options) {
+    this.$options = options;
     this.$data = options.data;
 
     // 添加响应式
@@ -40,7 +41,6 @@ class SVue {
         return val;
       },
       set: newVal => {
-        console.log('set', newVal);
         if (newVal === val) {
           return;
         }
@@ -56,7 +56,6 @@ class SVue {
         return this.$data[key];
       },
       set: newVal => {
-        console.log('key', this.$data.key);
         this.$data[key] = newVal;
       }
     });
