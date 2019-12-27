@@ -1,13 +1,12 @@
 <template>
   <scroll-view
     class="scroll-view"
-    :style="{height: scrollHeight}"
     :scroll-y="scrollY"
+    :style="{height: scrollHeight}"
     :scroll-with-animation="scrollWithAnimation"
     :lower-threshold="lowerThresHold"
-    :throttle="false"
     :enable-back-to-top="enableBackToTop"
-    @scroll.stop="onScroll"
+    @scroll="onScroll"
     @scrolltolower="onScrollTolower"
     @scrolltoupper="onScrollToupper"
   >
@@ -172,8 +171,8 @@ export default {
         return
       }
 
-      const endY = event.changedTouches[0].clientY
-      const dy = endY - this.startTouchY
+      const endTouchY = event.changedTouches[0].clientY
+      const dy = endTouchY - this.startTouchY
 
       if (this.scrollTop > 0 || dy <= 0) {
         return
@@ -182,7 +181,7 @@ export default {
       this.scrollY = false
       this.isMoved = true
 
-      const yDelta = this.systemName === 'ios' ? dy * 0.5 : dy * 0.5
+      const yDelta = this.systemName === 'ios' ? dy * 0.3 : dy * 0.5
       this.yDelta = yDelta
 
       const outOfRange = yDelta > this.loader.height
@@ -208,7 +207,7 @@ export default {
         this.reset()
       }
       this.isMoved = false
-      this.scrollY = true
+      this.scrollY = false
     },
 
     /**
